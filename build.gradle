@@ -1,0 +1,65 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
+    }
+}
+
+group 'com.bassjacob'
+version '0'
+
+apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'application'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+mainClassName = 'com.bassjacob.ylj.MainKt'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+junitPlatform {
+    filters {
+        engines {
+            include 'kotlintest'
+        }
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    compile "io.arrow-kt:arrow-core:$arrowVersion"
+    compile "io.arrow-kt:arrow-syntax:$arrowVersion"
+    compile "io.arrow-kt:arrow-typeclasses:$arrowVersion"
+    compile "io.arrow-kt:arrow-data:$arrowVersion"
+    compile "io.arrow-kt:arrow-instances-core:$arrowVersion"
+    compile "io.arrow-kt:arrow-instances-data:$arrowVersion"
+    kapt "io.arrow-kt:arrow-annotations-processor:$arrowVersion"
+    compile 'com.googlecode.lanterna:lanterna:3.0.0'
+
+    testCompile 'io.kotlintest:kotlintest-runner-junit5:3.1.0'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest {
+        attributes(
+                'Main-Class': 'com.bassjacob.ylj.MainKt'
+        )
+    }
+}
