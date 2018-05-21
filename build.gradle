@@ -18,11 +18,14 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'application'
 apply plugin: 'org.junit.platform.gradle.plugin'
 
-mainClassName = 'com.bassjacob.ylj.MainKt'
+kotlin { experimental { coroutines "enable" } }
+
+mainClassName = "io.ktor.server.netty.DevelopmentEngine"
 
 repositories {
     mavenCentral()
     jcenter()
+    maven { url "https://dl.bintray.com/kotlin/ktor" }
 }
 
 junitPlatform {
@@ -35,6 +38,11 @@ junitPlatform {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+
+    compile "io.ktor:ktor-server-netty:$ktorVersion"
+    compile "io.ktor:ktor-websockets:$ktorVersion"
+    compile "ch.qos.logback:logback-classic:1.2.1"
+
     compile "io.arrow-kt:arrow-core:$arrowVersion"
     compile "io.arrow-kt:arrow-syntax:$arrowVersion"
     compile "io.arrow-kt:arrow-typeclasses:$arrowVersion"
@@ -42,9 +50,17 @@ dependencies {
     compile "io.arrow-kt:arrow-instances-core:$arrowVersion"
     compile "io.arrow-kt:arrow-instances-data:$arrowVersion"
     kapt "io.arrow-kt:arrow-annotations-processor:$arrowVersion"
-    compile 'com.googlecode.lanterna:lanterna:3.0.0'
+
+    compile "io.arrow-kt:arrow-free:$arrowVersion" //optional
+    compile "io.arrow-kt:arrow-mtl:$arrowVersion" //optional
+    compile "io.arrow-kt:arrow-effects:$arrowVersion" //optional
+    compile "io.arrow-kt:arrow-effects-rx2:$arrowVersion" //optional
+    compile "io.arrow-kt:arrow-effects-kotlinx-coroutines:$arrowVersion" //optional
+    compile "io.arrow-kt:arrow-optics:$arrowVersion" //optional
+    compile "io.arrow-kt:arrow-generic:$arrowVersion" //optional
 
     testCompile 'io.kotlintest:kotlintest-runner-junit5:3.1.0'
+    testCompile "io.arrow-kt:arrow-test:$arrowVersion" //optional
 }
 
 compileKotlin {
