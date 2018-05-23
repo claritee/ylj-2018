@@ -21,7 +21,7 @@ statement and fill in the function body so that it returns the parameter plus on
  */
 
 fun addOne(x: Int): Int {
-    TODO()
+    return x + 1
 }
 
 /*
@@ -29,7 +29,7 @@ Functions can also be generic. We do this by defining any generic types in angle
  */
 
 fun <A> id(a: A): A {
-    TODO()
+    return a
 }
 
 /*
@@ -37,7 +37,7 @@ Functions can take multiple parameters as you would expect. Let's define the con
  */
 
 fun <A, B> const(a: A, b: B): A {
-    TODO()
+    return a
 }
 
 /*
@@ -57,7 +57,7 @@ You can also define functions as extensions. This is a way to define function pa
  */
 
 fun List<Int>.filterGreaterThanThreeExtension(): List<Int> {
-    TODO()
+    return filterGreaterThanThree(this)
 }
 
 //-----------------------------------------------------------

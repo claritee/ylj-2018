@@ -25,15 +25,16 @@ interface IdApplicativeInstance : Applicative<ForId>, IdFunctorInstance {
 
     override fun <A, B> Kind<ForId, A>.ap(ff: Kind<ForId, (A) -> B>): Kind<ForId, B> = Id.ap(ff.fix(), this.fix())
 
-    override fun <A, B> Kind<ForId, A>.map(f: (A) -> B): Kind<ForId, B> {
+    override fun <A, B> Kind<ForId, A>.map(f: (A) -> B): Kind<ForId, B> { //A->B is the ID
         // see if you can rewrite map only using Id.ap and Id.just
-        TODO()
+        return ap(just(f))
     }
 }
 
-fun <T> Id.Companion.just(t: T): Id<T> = TODO()
+fun <T> Id.Companion.just(t: T): Id<T> = Id(t) //just takes a value not in a class and puts this into the class
 
 fun <T, B> Id.Companion.ap(f: Id<(T) -> B>, Fa: Id<T>): Id<B> = TODO()
+//TODO: try map
 
 // Now do the same for Option
 

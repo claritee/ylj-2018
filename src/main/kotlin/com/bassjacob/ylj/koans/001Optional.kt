@@ -18,7 +18,8 @@ import arrow.core.Option
  */
 
 fun takesAnOptionalString(string: String?, default: String): String {
-    TODO("define a function that takes an optional string and returns it or a default string")
+//    TODO("define a function that takes an optional string and returns it or a default string")
+    return string ?: default
 }
 
 /*
@@ -26,7 +27,7 @@ fun takesAnOptionalString(string: String?, default: String): String {
  */
 
 fun takesAnOptionalString2(string: String?, default: String): String {
-    TODO("define a function that takes an optional string and returns it or a default string")
+    return string ?.let { string } ?: default
 }
 
 /*
@@ -34,7 +35,8 @@ fun takesAnOptionalString2(string: String?, default: String): String {
  */
 
 fun takesAnOptionalString3(string: String?, default: String): String {
-    TODO("define a function that takes an optional string and returns it or a default string")
+//    return string.getOrElse { default }
+    TODO()
 }
 
 /*
